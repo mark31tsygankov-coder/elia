@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админка — ответы Эли</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body class="admin-body">
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>Админка 🔐</h1>
+            <p style="color:#9a7a8a; margin-top:0.4rem;">Ответы Эли</p>
+        </div>
+
+        <!-- Логин -->
+        <div class="login-box" id="loginBox">
+            <p style="margin-bottom:1rem; text-align:center; color:#c9a0dc;">Введи пароль</p>
+            <input type="password" id="password" placeholder="Пароль..." autocomplete="off">
+            <button onclick="checkPassword()">Войти</button>
+            <p id="errorMsg" style="color:#ff6b9d; text-align:center; margin-top:0.8rem; display:none;">Неверный пароль</p>
+        </div>
+
+        <!-- Ответы -->
+        <div class="answers-box hidden" id="answersBox">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.2rem;">
+                <h2 style="color:var(--pink-light); font-size:1.2rem;">Все ответы</h2>
+                <button class="clear-btn" style="width:auto; padding:0.5rem 1rem; font-size:0.85rem;" onclick="clearAnswers()">Очистить</button>
+            </div>
+            <div id="answersList"></div>
+            <a href="index.html" style="display:block; text-align:center; margin-top:1.5rem; color:#c9a0dc; text-decoration:none;">← Назад на сайт</a>
+        </div>
+    </div>
+
+    <script>
+        // Простой пароль (можешь поменять)
+        const PASSWORD = 'elia2025';
+
+        function checkPassword() {
+            const input = document.getElementById('password').value;
+            if (input === PASSWORD) {
+                document.getElementById('loginBox').classList.add('hidden');
+                document.getElementById('answersBox').classList.remove('hidden');
+                loadAnswers();
+                // Запоминаем на сессию
+                sessionStorage.setItem('adminAuth', '1');
+            } else {
+                document.getElementById('errorMsg').style.display = 'block';
+            }
+        }
+
+        // Если уже авторизован в этой вкладке
+        if (sessionStorage.getItem('adminAuth') === '1') {
+            document.getElementById('loginBox').classList.add('hidden');
+            document.getElementById('answersBox').classList.remove('hidden');
+            loadAnswers();
+        }
+
+        // Enter для пароля
+        document.getElementById('password').addEventListener('keydown', e => {
+            if (e.key === 'Enter') checkPassword();
+        });
+
+        function loadAnswers() {
+            const list = document.getElementById('answersList');
+            const data = JSON.parse(localStorage.getItem('eliaAnswers') || '[]');
+
+            if (data.length === 0) {
+                list.innerHTML = '<div class="no-answers">Пока нет ответов 🌸<br>Когда Эля ответит — они появятся здесь</div>';
+                return;
+            }
+
+            list.innerHTML = data.map((a, i) => `
+                <div class="answer-item">
+                    <h3>Ответ #${data.length - i}</h3>
+                    <p><strong>Как дела:</strong> ${escapeHtml(a.q1)}</p>
+                    <p><strong>Настроение:</strong> ${escapeHtml(a.q2)}</p>
+                    <p><strong>Что делала:</strong> ${escapeHtml(a.q3)}</p>
+                    <p><strong>Что порадовало:</strong> ${escapeHtml(a.q4)}</p>
+                    <p><strong>Написать/позвонить:</strong> ${escapeHtml(a.q5)}</p>
+                    <p><strong>Ещё:</strong> ${escapeHtml(a.q6)}</p>
+                    <div class="timestamp">${a.timestamp}</div>
+                </div>
+            `).join('');
+        }
+
+        function clearAnswers() {
+            if (confirm('Точно очистить все ответы?')) {
+                localStorage.removeItem('eliaAnswers');
+                loadAnswers();
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Привет, Эля 💕</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-hearts"></div>
+    
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Привет, Эля ✨</h1>
+            <p class="subtitle">Как у тебя дела, солнышко?</p>
+        </div>
+        <div class="photo-carousel">
+            <div class="photo-track" id="photoTrack">
+                <img src="IMG_4358.jpg" alt="Эля" class="carousel-photo">
+                <img src="IMG_4355.jpg" alt="Эля" class="carousel-photo">
+                <img src="IMG_4354.jpg" alt="Эля" class="carousel-photo">
+                <img src="IMG_4349.jpg" alt="Эля" class="carousel-photo">
+                <img src="IMG_4348.jpg" alt="Эля" class="carousel-photo">
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="intro">
+            <p>Я сделал этот маленький сайт специально для тебя 💖<br>
+            Расскажи, как ты себя чувствуешь, что делала сегодня и какое у тебя настроение.</p>
+            <p class="date-note">Кстати… уже 1 ноября! Время летит 🍂</p>
+        </section>
+
+        <section class="quiz" id="quiz">
+            <h2>Немного вопросов 🌸</h2>
+            
+            <div class="question-card" data-q="1">
+                <label>1. Как у тебя дела прямо сейчас?</label>
+                <div class="options">
+                    <button type="button" data-value="Отлично 😊">Отлично 😊</button>
+                    <button type="button" data-value="Хорошо 🙂">Хорошо 🙂</button>
+                    <button type="button" data-value="Нормально 😐">Нормально 😐</button>
+                    <button type="button" data-value="Устала 😴">Устала 😴</button>
+                    <button type="button" data-value="Грустновато 🥺">Грустновато 🥺</button>
+                </div>
+                <textarea placeholder="Или напиши своими словами..." id="q1-text"></textarea>
+            </div>
+
+            <div class="question-card" data-q="2">
+                <label>2. Какое у тебя сейчас настроение?</label>
+                <div class="mood-scale">
+                    <button type="button" data-value="🔥 Огонь">🔥</button>
+                    <button type="button" data-value="😊 Радостное">😊</button>
+                    <button type="button" data-value="😌 Спокойное">😌</button>
+                    <button type="button" data-value="😴 Сонное">😴</button>
+                    <button type="button" data-value="🥺 Немного грустное">🥺</button>
+                    <button type="button" data-value="😤 Злое">😤</button>
+                </div>
+                <textarea placeholder="Что-то ещё про настроение?" id="q2-text"></textarea>
+            </div>
+
+            <div class="question-card" data-q="3">
+                <label>3. Что ты сегодня делала?</label>
+                <textarea placeholder="Расскажи чуть-чуть... учёба, прогулка, сериал, ничего особенного?" id="q3-text" rows="3"></textarea>
+            </div>
+
+            <div class="question-card" data-q="4">
+                <label>4. Что тебя сегодня порадовало?</label>
+                <textarea placeholder="Маленькая радость, мем, солнышко, кто-то милый..." id="q4-text" rows="2"></textarea>
+            </div>
+
+            <div class="question-card" data-q="5">
+                <label>5. Хочешь, чтобы я тебе написал / позвонил?</label>
+                <div class="options">
+                    <button type="button" data-value="Да, очень хочу 💕">Да, очень хочу 💕</button>
+                    <button type="button" data-value="Да, можно">Да, можно</button>
+                    <button type="button" data-value="Позже">Позже</button>
+                    <button type="button" data-value="Сейчас не очень удобно">Сейчас не очень удобно</button>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="6">
+                <label>6. Есть что-то, о чём хочешь рассказать или спросить?</label>
+                <textarea placeholder="Можешь написать всё, что угодно..." id="q6-text" rows="3"></textarea>
+            </div>
+
+            <button class="submit-btn" id="submitBtn">Отправить ответы 💌</button>
+        </section>
+
+        <section class="love-section">
+            <div class="love-card">
+                <p class="love-text">Я тебя люблю ❤️</p>
+                <p class="love-sub">Просто так. Без повода.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Сделано с теплом для Эли</p>
+        <a href="admin.html" class="admin-link">Админка</a>
+    </footer>
+
+    <div class="toast" id="toast">Спасибо! Твои ответы сохранены 💕</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
